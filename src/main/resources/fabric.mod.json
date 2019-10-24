@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "pathwatcher",
+  "version": "${version}",
+  "name": "Essentials",
+  "description": "Restarts the server when files are modified",
+  "authors": [
+    "Martmists"
+  ],
+  "contact": {
+    "sources": "https://dilaton.martmists.com/Martmists/PathWatcher"
+  },
+  "license": "MIT",
+  "icon": "assets/pathwatcher/icon.png",
+  "environment": "server",
+  "entrypoints": {
+    "server": [
+      {
+        "value": "com.martmists.pathwatcher.PathWatcherMod",
+        "adapter": "kotlin"
+      }
+    ]
+  },
+  "mixins": [
+  ],
+  "depends": {
+    "fabricloader": ">=0.4.0",
+    "fabric": "*"
+  },
+  "requires": {
+    "fabric-language-kotlin": ">=1.3.50"
+  }
+}
