@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "pathwatcher",
   "version": "${version}",
-  "name": "Essentials",
+  "name": "PathWatcher",
   "description": "Restarts the server when files are modified",
   "authors": [
     "Martmists"
@@ -25,9 +25,6 @@
   ],
   "depends": {
     "fabricloader": ">=0.4.0",
-    "fabric": "*"
-  },
-  "requires": {
     "fabric-language-kotlin": ">=1.3.50"
   }
 }

@@ -4,9 +4,7 @@ import net.fabricmc.api.DedicatedServerModInitializer
 
 class PathWatcherMod : DedicatedServerModInitializer {
     override fun onInitializeServer() {
-        config.directories.forEach {
-            PathWatchThread(it).start()
-        }
+        PathWatchThread(config.directories).start()
     }
 
     companion object {
