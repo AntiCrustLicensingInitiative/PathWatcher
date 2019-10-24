@@ -7,7 +7,9 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import java.io.File
 
 data class PathWatcherConfig(
-    val directories: Array<String>
+    val directories: Array<String>,
+    val restart_delay: Long,
+    val restart_script: String
 ) {
     companion object {
         fun load(): PathWatcherConfig {
