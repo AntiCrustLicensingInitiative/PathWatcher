@@ -1,7 +1,6 @@
 # Directories to watch for changes
 directories:
   - "mods"
-  - "config"
 
 # Time in milliseconds to restart after a change
 restart_delay: 1000
