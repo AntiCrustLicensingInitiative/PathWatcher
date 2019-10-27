@@ -19,6 +19,7 @@ apply plugin: "idea"
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
+compileKotlin.kotlinOptions.jvmTarget = "1.8"
 
 archivesBaseName = project.archives_base_name
 version = project.mod_version

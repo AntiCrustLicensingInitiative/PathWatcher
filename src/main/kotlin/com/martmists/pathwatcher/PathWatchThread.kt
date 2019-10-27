@@ -1,6 +1,7 @@
 package com.martmists.pathwatcher
 
 import net.fabricmc.api.DedicatedServerModInitializer
+import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.server.dedicated.DedicatedServer
 import net.minecraft.server.dedicated.MinecraftDedicatedServer
 import java.io.File
@@ -10,7 +11,7 @@ import java.lang.management.ManagementFactory
 import kotlin.system.exitProcess
 
 
-class PathWatchThread(val paths: Array<String>) : Thread() {
+class PathWatchThread(private val paths: Array<String>) : Thread() {
     private var running = true
 
     override fun run() {
@@ -32,11 +33,13 @@ class PathWatchThread(val paths: Array<String>) : Thread() {
             for (event in watchKey.pollEvents()) {
                 sleep(PathWatcherMod.config.restart_delay)
 
+                val server = (FabricLoader.getInstance().gameInstance as MinecraftDedicatedServer)
+
                 if (PathWatcherMod.config.restart_script.isNotBlank())
                     ProcessBuilder(PathWatcherMod.config.restart_script).inheritIO().start()
                 // Runtime.getRuntime().exec(PathWatcherMod.config.restart_script)
                 running = false
-                System.exit(0)
+                server.stop(true)
             }
 
             if (!watchKey.reset()) {

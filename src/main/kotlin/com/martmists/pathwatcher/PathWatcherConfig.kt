@@ -15,7 +15,7 @@ data class PathWatcherConfig(
         fun load(): PathWatcherConfig {
             val f = File("config/pathwatcher.yml")
             if (!f.exists()){
-                val stream = javaClass.classLoader.getResourceAsStream("pathwatcher.yml")
+                val stream = this::class.java.classLoader.getResourceAsStream("pathwatcher.yml")
                 if (!f.parentFile.exists()) {
                     f.parentFile.mkdirs()
                 }
