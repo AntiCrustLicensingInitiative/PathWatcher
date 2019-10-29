@@ -1,0 +1,23 @@
+kind: pipeline
+type: docker
+name: linux-amd64
+
+platform:
+  arch: amd64
+  os: linux
+
+steps:
+  - name: deploy-staging
+    image: openjdk:8
+    volumes:
+      - name: staging
+        path: /staging
+    commands:
+      - ./gradlew build
+      - rm build/libs/*-dev.jar
+      - mv build/libs/*.jar /staging/mods
+
+volumes:
+  - name: staging
+    host:
+      path: /opt/essentials
