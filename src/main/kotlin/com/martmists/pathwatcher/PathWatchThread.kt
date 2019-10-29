@@ -40,6 +40,7 @@ class PathWatchThread(private val paths: Array<String>) : Thread() {
                 // Runtime.getRuntime().exec(PathWatcherMod.config.restart_script)
                 running = false
                 server.stop(true)
+                break
             }
 
             if (!watchKey.reset()) {
