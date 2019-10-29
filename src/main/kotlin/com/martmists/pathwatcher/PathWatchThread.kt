@@ -14,6 +14,11 @@ import kotlin.system.exitProcess
 class PathWatchThread(private val paths: Array<String>) : Thread() {
     private var running = true
 
+    override fun start() {
+        this.isDaemon = true
+        super.start()
+    }
+
     override fun run() {
         val watchService = FileSystems.getDefault().newWatchService()
 
