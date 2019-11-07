@@ -32,27 +32,24 @@ class PathWatchThread(private val paths: Array<String>) : Thread() {
             )
         }
 
-        while (running) {
-            val watchKey = watchService.take()
+        val watchKey = watchService.take()
 
-            for (event in watchKey.pollEvents()) {
-                sleep(PathWatcherMod.config.restart_delay)
+        for (event in watchKey.pollEvents()) {
+            sleep(PathWatcherMod.config.restart_delay)
 
-                val server = (FabricLoader.getInstance().gameInstance as MinecraftDedicatedServer)
+            val server = (FabricLoader.getInstance().gameInstance as MinecraftDedicatedServer)
 
-                if (PathWatcherMod.config.restart_script.isNotBlank())
-                    ProcessBuilder(PathWatcherMod.config.restart_script).inheritIO().start()
-                // Runtime.getRuntime().exec(PathWatcherMod.config.restart_script)
-                running = false
-                server.stop(false)
-                break
-            }
+            if (PathWatcherMod.config.restart_script.isNotBlank())
+                ProcessBuilder(PathWatcherMod.config.restart_script).inheritIO().start()
+            // Runtime.getRuntime().exec(PathWatcherMod.config.restart_script)
+            running = false
+            server.stop(false)
+            break
+        }
 
-            if (!watchKey.reset()) {
-                watchKey.cancel()
-                watchService.close()
-                break
-            }
+        if (!watchKey.reset()) {
+            watchKey.cancel()
+            watchService.close()
         }
     }
 }
