@@ -44,7 +44,7 @@ class PathWatchThread(private val paths: Array<String>) : Thread() {
                     ProcessBuilder(PathWatcherMod.config.restart_script).inheritIO().start()
                 // Runtime.getRuntime().exec(PathWatcherMod.config.restart_script)
                 running = false
-                server.stop(true)
+                server.stop(false)
                 break
             }
 
