@@ -43,13 +43,15 @@ class PathWatchThread(private val paths: Array<String>) : Thread() {
                 ProcessBuilder(PathWatcherMod.config.restart_script).inheritIO().start()
             // Runtime.getRuntime().exec(PathWatcherMod.config.restart_script)
             running = false
-            server.stop(false)
-            break
-        }
 
-        if (!watchKey.reset()) {
-            watchKey.cancel()
-            watchService.close()
+            if (!watchKey.reset()) {
+                watchKey.cancel()
+                watchService.close()
+            }
+
+            server.stop(false)
+            threadGroup.interrupt()
+            break
         }
     }
 }
